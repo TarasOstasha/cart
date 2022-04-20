@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="card col-md-3" style="width: 18rem;" *ngFor="let product of products;let i = index;">
+        <img class="card-img-top" [src]="product.img" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <div class="price">
+                <a class="btn btn-primary" (click)="addToCart(product,i)">buy</a>
+                <a><i class="bi bi-eye quickView" (click)="quickView(product)"></i></a>
+                <input min="1" (change)="productPrice(product, i, $event)" name="product.quantity" type="number"
+                    [value]="product.defaultQuantity">
+                <strong>{{ product.price  | currency }}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="quickView-modal" *ngIf="quickViewFlag">
+        <div class="card">
+            <img class="card-img-top" [src]="quickViewProd.img" alt="Card image cap">
+            <div class="card-body">{{quickViewProd | json}}
+                <h5 class="card-title">{{ quickViewProd.name }}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's contendkvndlksnlknt.<br>dsfdsfdsfdsf dfd sfds f
+                    <br>dkvdlkvndlknvdslk
+                </p>
+                <a [routerLink]="['/product', quickViewProd.id ]" [queryParams]="{ id:quickViewProd.id,name:quickViewProd.name }" routerLinkActive="router-link-active"  class="btn btn-primary">Go to the page</a>
+                <a (click)="quickViewFlag=false" class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

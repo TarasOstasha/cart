@@ -1,0 +1,7 @@
+<app-header [item]="items" (passItemEvent)="updateProdState1($event)"></app-header>
+<div class="container">
+    <div class="card-wrapper">
+        <app-product-card [updatedItems]="items" (newItemEvent)="addToCart($event)"></app-product-card>
+    </div>
+
+</div>

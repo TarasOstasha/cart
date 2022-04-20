@@ -22,7 +22,10 @@
                     card's contendkvndlksnlknt.<br>dsfdsfdsfdsf dfd sfds f
                     <br>dkvdlkvndlknvdslk
                 </p>
-                <a [routerLink]="['/product', quickViewProd.id ]" [queryParams]="{ id:quickViewProd.id,name:quickViewProd.name }" routerLinkActive="router-link-active"  class="btn btn-primary">Go to the page</a>
+                <!-- 1 method how to pass id -->
+                <!-- <a [routerLink]="['/product', quickViewProd.id ]" routerLinkActive="router-link-active"  class="btn btn-primary">Go to the page</a> -->
+                
+                <a [routerLink]="['/product']" [queryParams]="{ id: quickViewProd.id }" routerLinkActive="router-link-active"  class="btn btn-primary">Go to the page</a>
                 <a (click)="quickViewFlag=false" class="btn btn-danger"><i class="bi bi-x-circle"></i></a>
             </div>
         </div>

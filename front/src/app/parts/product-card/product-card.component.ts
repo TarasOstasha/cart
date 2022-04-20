@@ -1,15 +1,16 @@
 import { Component, OnInit, ViewChild, ElementRef,  Input, Output, EventEmitter } from '@angular/core';
+import { ProductCard } from '../../interfaces/product-model';
 
-export interface productCard {
-  id: number;
-  name: string;
-  description: string;
-  defaultPrice: number;
-  price: number;
-  img: string;
-  defaultQuantity: number;
-  quantity: number;
-}
+// export interface productCard {
+//   id: number;
+//   name: string;
+//   description: string;
+//   defaultPrice: number;
+//   price: number;
+//   img: string;
+//   defaultQuantity: number;
+//   quantity: number;
+// }
 
 
 
@@ -21,13 +22,13 @@ export interface productCard {
 
 
 export class ProductCardComponent implements OnInit {
-  @Input() updatedItems: productCard[] = [];
+  @Input() updatedItems: ProductCard[] = [];
   @Output() newItemEvent = new EventEmitter<any>(); // The name of the @Output()
 
   quantity: number = 1; // default quantity value
   cartProducts: Array<object> = []; // basket items
  
-  products: productCard[] = [
+  products: ProductCard[] = [
     { 
       id: 1,
       name: 'Test1',
@@ -96,7 +97,7 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  productPrice(product: productCard ,index: number, event: any) {
+  productPrice(product: ProductCard ,index: number, event: any) {
     product.quantity = event.target.value; // products quantity
     product.price = this.products[index].defaultPrice * product.quantity; // generate dynamically price per product
     //this.cartProducts.push(product); // add product to the cart
@@ -107,7 +108,7 @@ export class ProductCardComponent implements OnInit {
 
  
   // add to cart
-  addToCart(product: productCard, index: number) {  
+  addToCart(product: ProductCard, index: number) {  
     +product.quantity++;
     if(product.quantity > 0) product.defaultQuantity = product.quantity; // set default quantity after 
     product.price = this.products[index].defaultPrice * product.quantity;
@@ -117,7 +118,7 @@ export class ProductCardComponent implements OnInit {
   // quick view
   quickViewFlag: boolean = false;
   quickViewProd: any = {}; //productCard[] = [];
-  quickView(product: productCard) {
+  quickView(product: ProductCard) {
     this.quickViewFlag = true;
     this.quickViewProd = product;
     //this.quickViewProd.push(product);

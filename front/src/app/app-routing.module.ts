@@ -6,7 +6,9 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'product/:id', component: ProductPageComponent }
+  //{ path: 'product/:id', component: ProductPageComponent } // 1 method how to pass id
+  { path: 'product', component: ProductPageComponent }
+
 ];
 
 @NgModule({

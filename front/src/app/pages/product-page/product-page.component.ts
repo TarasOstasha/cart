@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, from, pipe } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -23,8 +23,11 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./product-page.component.less']
 })
 export class ProductPageComponent implements OnInit {
+  products: ProductCard[] = []; // default products array when you click add product
+  items: ProductCard[] = this.productCart; // set to the header quantity of products via @input in header
 
   constructor(private _route: ActivatedRoute, private _api: ApiService) { }
+
 
   ngOnInit(): void {
     // *** 1 method how to use query params
@@ -34,17 +37,40 @@ export class ProductPageComponent implements OnInit {
     //     map(result => result)
     //   ).subscribe(result => console.log(result))
     // ***
-    
+
     // *** 2 method how to use query params
     this._route.queryParams.subscribe((params) => { // get params
       console.log(params.id)
       this._api.getProduct(params.id) // get single clicked product
-      .pipe(
-        map(result => result)
-      ).subscribe(result => console.log(result))
+        .pipe(
+          map(result => result)
+        ).subscribe((result: any) => this.productCart = result.result)
     });
     // ***
 
+  }
+
+  addToCart() {
+    //console.log('works', this.items);
+    this.productCart.map((item: any) => {
+      item.quantity++;
+      this.localStorageSetItem = JSON.stringify(item); // set to the localstorage
+      //console.log(item)
+    });
+
+
+  }
+
+  set productCart(product: any) { // setter use in line 47
+    this.products.push(product);
+  }
+
+  get productCart() { // get array of products
+    return this.products;
+  }
+
+  set localStorageSetItem(product: any) { // set function localstorage
+    localStorage.setItem('product', product)
   }
 
 }

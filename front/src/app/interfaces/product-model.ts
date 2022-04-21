@@ -7,4 +7,5 @@ export interface ProductCard {
     img: string;
     defaultQuantity: number;
     quantity: number;
+    category: Array<number>;
   }

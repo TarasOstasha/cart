@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
-export interface productCard {
-  id: number;
-  name: string;
-  description: string;
-  defaultPrice: number;
-  price: number;
-  img: string;
-  defaultQuantity: number;
-  quantity: number;
-}
+import { ProductCard } from '../../interfaces/product-model';
+// export interface productCard {
+//   id: number;
+//   name: string;
+//   description: string;
+//   defaultPrice: number;
+//   price: number;
+//   img: string;
+//   defaultQuantity: number;
+//   quantity: number;
+// }
 
 @Component({
   selector: 'app-header',
@@ -17,13 +17,19 @@ export interface productCard {
   styleUrls: ['./header.component.less']
 })
 export class HeaderComponent implements OnInit {
-  @Input() item: productCard[] = []; // decorate the property with @Input()
+  @Input() item: ProductCard[] = []; // decorate the property with @Input()
   @Output() passItemEvent = new EventEmitter<any>(); // The name of the @Output()
 
 
   constructor() { }
 
   ngOnInit(): void {
+    //this.total()
+    let locst:any = this.itemFromLocalStorage;
+    console.log(locst.id)
+    setTimeout(() => {
+      console.log(this.countTotal, this.item)
+    }, 2000);
   }
 
   get countTotal() {
@@ -36,5 +42,14 @@ export class HeaderComponent implements OnInit {
   updateProdState() {
     this.passItemEvent.emit(this.item);
   }
+
+  get itemFromLocalStorage() {
+    return localStorage.getItem('product');
+  }
+
+  // total() {
+  //   if( this.countTotal == null || this.countTotal == 0 ) this.itemFromLocalStorage
+  //   else this.countTotal + +this.itemFromLocalStorage.id
+  // }
 
 }

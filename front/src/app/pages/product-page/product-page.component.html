@@ -1,3 +1,4 @@
+<app-header [item]="items"></app-header>
 <div class="container">
     <!--   https://www.jerecho.com/codepen/nike-product-page/ -->
     <div class="product-image">
@@ -54,7 +55,7 @@
             </div>
         </div>
         <div class="footer">
-            <button type="button">
+            <button type="button" (click)="addToCart()">
                 <img src="http://co0kie.github.io/codepen/nike-product-page/cart.png" alt="">
                 <span>add to cart</span>
             </button>
@@ -67,3 +68,4 @@
 <a href="https://www.youtube.com/watch?v=qGOxPVHfZuE" target="_blank" title="Watch me speed code this"
     style="position: fixed; bottom: 10px; right: 10px"><img src="http://co0kie.github.io/codepen/youtube.png"
         alt=""></a>
+<!-- <app-footer></app-footer> -->

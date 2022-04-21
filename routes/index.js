@@ -15,7 +15,8 @@ let products = [
     price: 150,
     img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
     defaultQuantity: 1,
-    quantity: 0
+    quantity: 0,
+    category: []
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ let products = [
     price: 170,
     img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
     defaultQuantity: 1,
-    quantity: 0
+    quantity: 0,
+    category: []
   },
   {
     id: 3,
@@ -35,7 +37,8 @@ let products = [
     price: 220,
     img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
     defaultQuantity: 1,
-    quantity: 0
+    quantity: 0,
+    category: []
   },
   {
     id: 4,
@@ -45,7 +48,8 @@ let products = [
     price: 340,
     img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
     defaultQuantity: 1,
-    quantity: 0
+    quantity: 0,
+    category: []
   },
   {
     id: 5,
@@ -55,7 +59,8 @@ let products = [
     price: 100,
     img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
     defaultQuantity: 1,
-    quantity: 0
+    quantity: 0,
+    category: []
   },
   {
     id: 6,
@@ -65,7 +70,8 @@ let products = [
     price: 90,
     img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
     defaultQuantity: 1,
-    quantity: 0
+    quantity: 0,
+    category: []
   }
 ]
 
@@ -73,7 +79,7 @@ router.get('/product/:id', (req, res) => {
   try {
     const { id } = req.params;
     let product = products.find((item => {
-      return item.id = id
+      return item.id == id
     }))
     console.log(id, 'params')
     res.status(201).json({

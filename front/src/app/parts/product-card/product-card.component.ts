@@ -37,7 +37,8 @@ export class ProductCardComponent implements OnInit {
       price: 150,
       img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
       defaultQuantity: 1,
-      quantity: 0
+      quantity: 0,
+      category: []
     },
      { 
       id: 2,
@@ -47,7 +48,8 @@ export class ProductCardComponent implements OnInit {
       price: 170,
       img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
       defaultQuantity: 1,
-      quantity: 0
+      quantity: 0,
+      category: []
     },
      { 
       id: 3,
@@ -57,7 +59,8 @@ export class ProductCardComponent implements OnInit {
       price: 220,
       img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
       defaultQuantity: 1,
-      quantity: 0
+      quantity: 0,
+      category: []
     },
      { 
       id: 4,
@@ -67,7 +70,8 @@ export class ProductCardComponent implements OnInit {
       price: 340,
       img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
       defaultQuantity: 1,
-      quantity: 0
+      quantity: 0,
+      category: []
     },
      { 
       id: 5,
@@ -77,7 +81,8 @@ export class ProductCardComponent implements OnInit {
       price: 100,
       img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
       defaultQuantity: 1,
-      quantity: 0
+      quantity: 0,
+      category: []
     },
      { 
       id: 6,
@@ -87,7 +92,8 @@ export class ProductCardComponent implements OnInit {
       price: 90,
       img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
       defaultQuantity: 1,
-      quantity: 0
+      quantity: 0,
+      category: []
     }
   ]
   categories: string[] = []; // for futures categories

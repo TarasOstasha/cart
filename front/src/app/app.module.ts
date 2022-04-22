@@ -9,6 +9,7 @@ import { HeaderComponent } from './parts/header.ts/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductCardComponent } from './parts/product-card/product-card.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { CartComponent } from './parts/cart/cart.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
     HeaderComponent,
     HomeComponent,
     ProductCardComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,59 @@
+<app-header [item]="items"></app-header>
+<div class="container">
+    <h1>Shopping Cart</h1>
+    <div class="shopping-cart">
+
+        <div class="column-labels">
+            <label class="product-image">Image</label>
+            <label class="product-details">Product</label>
+            <label class="product-price">Price</label>
+            <label class="product-quantity">Quantity</label>
+            <label class="product-removal">Remove</label>
+            <label class="product-line-price">Total</label>
+        </div>
+
+        <div class="product" *ngFor="let product of products;let i = index;">
+            <div class="product-image">
+                <img [src]="product.img">
+            </div>
+            <div class="product-details">
+                <div class="product-title">{{ product.name }}</div>
+                <p class="product-description">{{ product.description }}</p>
+            </div>
+            <div class="product-price">{{ product.price | currency }}</div>
+            <div class="product-quantity">
+                <input (change)="productPrice(product, i, $event)" type="number" [value]="product.quantity" min="1">
+            </div>
+            <div class="product-removal">
+                <button class="remove-product">
+                    Remove
+                </button>
+            </div>
+            <div class="product-line-price">{{ totalPrice }}</div>
+        </div>
+
+   
+
+        <div class="totals">
+            <div class="totals-item">
+                <label>Subtotal</label>
+                <div class="totals-value" id="cart-subtotal">{{ totalPrice }}</div>
+            </div>
+            <div class="totals-item">
+                <label>Tax (5%)</label>
+                <div class="totals-value" id="cart-tax">{{ productTax }}</div>
+            </div>
+            <div class="totals-item">
+                <label>Shipping</label>
+                <div class="totals-value" id="cart-shipping">15.00</div>
+            </div>
+            <div class="totals-item totals-item-total">
+                <label>Grand Total</label>
+                <div class="totals-value" id="cart-total">{{ grandSubTotal }}</div>
+            </div>
+        </div>
+
+        <button class="checkout">Checkout</button>
+
+    </div>
+</div>

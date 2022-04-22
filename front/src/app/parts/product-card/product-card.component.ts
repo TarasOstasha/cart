@@ -26,7 +26,7 @@ export class ProductCardComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<any>(); // The name of the @Output()
 
   quantity: number = 1; // default quantity value
-  cartProducts: Array<object> = []; // basket items
+  cartProducts: Array<ProductCard> = []; // basket items
  
   products: ProductCard[] = [
     { 
@@ -106,10 +106,7 @@ export class ProductCardComponent implements OnInit {
   productPrice(product: ProductCard ,index: number, event: any) {
     product.quantity = event.target.value; // products quantity
     product.price = this.products[index].defaultPrice * product.quantity; // generate dynamically price per product
-    //this.cartProducts.push(product); // add product to the cart
     this.newItemEvent.emit(product); // emit to the parent all product object
-
-    console.log(product)
   }
 
  
@@ -119,6 +116,10 @@ export class ProductCardComponent implements OnInit {
     if(product.quantity > 0) product.defaultQuantity = product.quantity; // set default quantity after 
     product.price = this.products[index].defaultPrice * product.quantity;
     this.newItemEvent.emit(product); // emit to the parent all product object
+    let duplicated = this.cartProducts.find(item => item.id === product.id);
+    if(duplicated) product.quantity+1 // change quantity if exist product
+    else this.cartProducts.push(product); // add product to the cart
+    console.log(this.cartProducts);
   }
 
   // quick view

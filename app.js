@@ -1,15 +1,35 @@
+require('dotenv').config();
+//const result = dotenv.config()
+
 var createError = require('http-errors');
 var express = require('express');
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
+const chalk = require('chalk');
+
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+const PASS = 1111 //process.env.MONGO_KEY; change to env when build
+// ** connection to data base ** \\
+mongoose.connect(`mongodb+srv://user:${PASS}@cluster0.olmgj.mongodb.net/cart?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }) // test data base
+  .then(() => {
+    console.log(chalk.blue('Connected to store database'));
+  })
+  .catch(() => {
+    console.log(chalk.red('Connection failed'));
+  });
+// ** connection to data base ** \\
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

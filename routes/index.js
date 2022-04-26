@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const Product = require('../models/productModel');
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
@@ -74,6 +76,45 @@ let products = [
     category: []
   }
 ]
+
+router.post('/products', (req, res) => {
+
+  let test = {
+    id: 1,
+    name: 'Test1',
+    description: 'lorem5 ncjdksnc djsnjsn dsk nds',
+    defaultPrice: 150,
+    price: 150,
+    img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
+    defaultQuantity: 1,
+    quantity: 0,
+    category: []
+  }
+  const product = new Product({
+    id: test.id,
+    name: test.name,
+    description: test.description,
+    defaultPrice: test.defaultPrice,
+    price: test.price,
+    img: test.img,
+    defaultQuantity: test.defaultQuantity,
+    quantity: test.quantity,
+    category: test.category
+  })
+  product.save()
+    .then(result => {
+      res.status(201).json({
+        message: 'New Product Created',
+        result: result
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: 'Error'
+      });
+    });
+
+});
 
 router.get('/product/:id', (req, res) => {
   try {

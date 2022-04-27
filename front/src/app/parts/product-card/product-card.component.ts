@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef,  Input, Output, EventEmitter } from '@angular/core';
 import { ProductCard } from '../../interfaces/product-model';
+import { ApiService } from 'src/app/services/api.service';
 
 // export interface productCard {
 //   id: number;
@@ -11,7 +12,6 @@ import { ProductCard } from '../../interfaces/product-model';
 //   defaultQuantity: number;
 //   quantity: number;
 // }
-
 
 
 @Component({
@@ -28,79 +28,20 @@ export class ProductCardComponent implements OnInit {
   quantity: number = 1; // default quantity value
   cartProducts: Array<ProductCard> = []; // basket items
  
-  products: ProductCard[] = [
-    { 
-      id: 1,
-      name: 'Test1',
-      description: 'lorem5 ncjdksnc djsnjsn dsk nds',
-      defaultPrice: 150,
-      price: 150,
-      img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
-      defaultQuantity: 1,
-      quantity: 0,
-      category: []
-    },
-     { 
-      id: 2,
-      name: 'Test2',
-      description: 'lorem5 ncjdksnc djsnjsn dsk nds',
-      defaultPrice: 170,
-      price: 170,
-      img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
-      defaultQuantity: 1,
-      quantity: 0,
-      category: []
-    },
-     { 
-      id: 3,
-      name: 'Test3',
-      description: 'lorem5 ncjdksnc djsnjsn dsk nds',
-      defaultPrice: 220,
-      price: 220,
-      img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
-      defaultQuantity: 1,
-      quantity: 0,
-      category: []
-    },
-     { 
-      id: 4,
-      name: 'Test4',
-      description: 'lorem5 ncjdksnc djsnjsn dsk nds',
-      defaultPrice: 340,
-      price: 340,
-      img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
-      defaultQuantity: 1,
-      quantity: 0,
-      category: []
-    },
-     { 
-      id: 5,
-      name: 'Test5',
-      description: 'lorem5 ncjdksnc djsnjsn dsk nds',
-      defaultPrice: 100,
-      price: 100,
-      img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
-      defaultQuantity: 1,
-      quantity: 0,
-      category: []
-    },
-     { 
-      id: 6,
-      name: 'Test6',
-      description: 'lorem5 ncjdksnc djsnjsn dsk nds',
-      defaultPrice: 90,
-      price: 90,
-      img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
-      defaultQuantity: 1,
-      quantity: 0,
-      category: []
-    }
-  ]
+  products: ProductCard[] = []; // default products on a MAIN PAGE
   categories: string[] = []; // for futures categories
 
-  constructor() { }
+  constructor(public _api: ApiService) { }
+
+  async getAllProducts() {
+    const productsFromServer: Promise<any> = this._api.getProducts(); // send request for all products
+    const products = await productsFromServer;
+    this.products = products.products;
+    console.log(products)
+  }
 
   ngOnInit(): void {
+    this.getAllProducts();
   }
 
   productPrice(product: ProductCard ,index: number, event: any) {

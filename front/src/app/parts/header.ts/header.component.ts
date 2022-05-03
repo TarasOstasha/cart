@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { ProductCard } from '../../interfaces/product-model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 // export interface productCard {
 //   id: number;
 //   name: string;
@@ -20,22 +21,36 @@ export class HeaderComponent implements OnInit {
   @Input() item: ProductCard[] = []; // decorate the property with @Input()
   @Output() passItemEvent = new EventEmitter<any>(); // The name of the @Output()
 
+  localStorageItems: ProductCard[] = []; // array with items from localstorage
 
-  constructor() { }
+  constructor(private _localStorage: LocalStorageService) { }
 
   ngOnInit(): void {
-    //this.total()
-    let locst:any = this.itemFromLocalStorage;
-    console.log(locst.id)
-    setTimeout(() => {
-      console.log(this.countTotal, this.item)
-    }, 2000);
-  }
+    //this.item.push(this._localStorage.getLocal('product'));
+    setTimeout(()=>{
+      let localStorageProduct = this._localStorage.getLocal('product');
+      this.item.map((item: ProductCard, index: number) => {
+        console.log(item.quantity, '-item quantity');
+        console.log(localStorageProduct.quantity, '-localStorageProduct');
+        if(item.id === localStorageProduct.id) item.quantity = localStorageProduct.quantity + 1;
+        else this.item.push(localStorageProduct)
+      })
+      //console.log(this.item,localStorageProduct);
+    },1000)
 
-  get countTotal() {
-    //console.log(this.item)
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    //console.log(changes)
+  }
+  ngDoCheck() {
+    
+  }
+ 
+
+  get quantity(): number {
     return this.item.reduce((acc, item)=>{
-      return acc + +item.quantity
+      //console.log(item)
+      return +acc + +item.quantity
     },0);
   }
 
@@ -43,13 +58,5 @@ export class HeaderComponent implements OnInit {
     this.passItemEvent.emit(this.item);
   }
 
-  get itemFromLocalStorage() {
-    return localStorage.getItem('product');
-  }
-
-  // total() {
-  //   if( this.countTotal == null || this.countTotal == 0 ) this.itemFromLocalStorage
-  //   else this.countTotal + +this.itemFromLocalStorage.id
-  // }
 
 }

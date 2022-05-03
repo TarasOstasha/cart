@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductCard } from '../interfaces/product-model';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
 interface ProductResults{
   message: string;
@@ -16,9 +17,19 @@ else var url = '/'; //production
 })
 export class ApiService {
 
+  //selectedProductSource = new Subject<ProductCard | null>(); // set subject
+  selectedProductSource = new BehaviorSubject<ProductCard | null>(null); // set BehaviorSubject
+  selectedProductChanges$ = this.selectedProductSource.asObservable(); // set as observable
+
+  cartProducts: Array<ProductCard> = []; // basket items
+
+  changeSelectedProduct(selectedProduct: ProductCard | null): void {
+    this.selectedProductSource.next(selectedProduct);
+  }
+
   constructor(private _http: HttpClient) { }
 
-  getProducts() { // get all products from the server
+  getProducts(): Promise<ProductResults> { // get all products from the server
     return this._http.get<ProductResults>(url + 'products').toPromise();
   }
 

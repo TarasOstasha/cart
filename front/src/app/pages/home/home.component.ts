@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductCard } from '../../interfaces/product-model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 // export interface productCard {
 //   id: number;
@@ -19,7 +20,7 @@ import { ProductCard } from '../../interfaces/product-model';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _localStorage: LocalStorageService) { }
 
   ngOnInit(): void {
   }

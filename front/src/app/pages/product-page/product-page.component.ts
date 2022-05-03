@@ -1,9 +1,10 @@
 import { Component, OnInit, Output,Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, from, pipe } from 'rxjs';
+import { Observable, from, pipe, BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ProductCard } from '../../interfaces/product-model';
 import { ApiService } from 'src/app/services/api.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 
 // export interface productCard {
@@ -26,7 +27,12 @@ export class ProductPageComponent implements OnInit {
   products: ProductCard[] = []; // default products array when you click add product
   items: ProductCard[] = this.productCart; // set to the header quantity of products via @input in header
 
-  constructor(private _route: ActivatedRoute, private _api: ApiService) { }
+
+  constructor(
+      private _route: ActivatedRoute, 
+      private _api: ApiService, 
+      private _localStorage: LocalStorageService
+    ) { }
 
 
   ngOnInit(): void {
@@ -40,7 +46,7 @@ export class ProductPageComponent implements OnInit {
 
     // *** 2 method how to use query params
     this._route.queryParams.subscribe((params) => { // get params
-      console.log(params.id)
+      //console.log(params.id)
       this._api.getProduct(params.id) // get single clicked product
         .pipe(
           map(result => result)
@@ -51,11 +57,13 @@ export class ProductPageComponent implements OnInit {
   }
 
   addToCart() {
-    //console.log('works', this.items);
-    this.productCart.map((item: any) => {
-      item.quantity++;
-      this.localStorageSetItem = JSON.stringify(item); // set to the localstorage
+    this.productCart.map((item: ProductCard) => {
+      this._localStorage.setLocal('product', item);
+      //console.log(item.quantity)
+      //console.log('works', this.items);
+      let found = this.items.find((prod: ProductCard) => prod.id === item.id);
       //console.log(item)
+      item.quantity++;
     });
 
 
@@ -69,8 +77,5 @@ export class ProductPageComponent implements OnInit {
     return this.products;
   }
 
-  set localStorageSetItem(product: any) { // set function localstorage
-    localStorage.setItem('product', product)
-  }
 
 }
